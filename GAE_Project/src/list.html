@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+		<link rel = "stylesheet" type = "text/css" href = "/stylesheets/style.css">
+  </head>
+  <body>
+  
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/upload">Upload</a></li>
+		<li><a href="/images">Images</a></li>
+		<li><a href="/audio">Audios</a></li>
+		<li><a href="/video">Videos</a></li>
+	</ul>
+	
+	<div class="container contentalign realign" style="padding-left:32px;">
+		<h2> Lists all files uploaded : You may view or download!</h2>
+		<h4> (Media files take a minute to load after upload.) <br><br> Please Refresh to view the change.<h4>
+		<p class="indent">
+			{% for file in files %}
+				<b>{{ file.blob.filename }}</b>  &thinsp;
+				<a href="/view?key={{file.key()}}"}>View</a> &thinsp;
+				<a href="/download?key={{file.key()}}"}>Download</a> &thinsp;
+				<a href="/delete?key={{file.key()}}"}>Delete</a>
+				<br><br>
+			{% endfor %}
+		</p>
+	</div>	
+  </body>
+</html>
+{% endautoescape %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+		<link rel = "stylesheet" type = "text/css" href = "/stylesheets/style.css">
+  </head>
+  <body>
+  
+	<ul>
+		<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
+		<li><a href="/upload">Upload</a></li>
+		<li><a href="/list">Download</a></li>
+		<li><a href="/images">Images</a></li>
+		<li><a href="/audio">Audios</a></li>
+		<li><a href="/video">Videos</a></li>
+	</ul>
+
+	<div class="container contentalign realign" style="padding-left:32px;">
+
+    {% for greeting in greetings %}
+      {% if greeting.author %}
+        <b>{{ greeting.author.nickname() }}</b> wrote:
+      {% else %}
+       An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting.content }}</blockquote>
+    {% endfor %}
+	
+	 <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Post Comments"></div>
+    </form>
+
+    <hr>
+
+    <form>Folder Name:
+      <input value="{{ guestbook_name }}" name="guestbook_name">
+      <input type="submit" value="switch">
+    </form>
+
+	</div>
+  </body>
+</html>
+{% endautoescape %}
